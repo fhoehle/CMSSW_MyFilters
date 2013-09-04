@@ -107,6 +107,7 @@ DiLepMcFilter::filter(edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
 	edm::Handle< edm::View< std::vector<reco::GenParticle> > > ttbarEvent; //std::vector< std::vector<std::vector<reco::GenParticle> > >
     	iEvent.getByLabel(ttbarEventTag_, ttbarEvent);
+        if (ttbarEvent->size() != 10){ std::cout<<"error ttbarEvent has WRONG size "<<ttbarEvent->size()<<std::endl; return false;}
 	reco::GenParticle WplusDecay1; WplusDecay1 = (*ttbarEvent)[3][0];
 	reco::GenParticle WplusDecay2; WplusDecay2 = (*ttbarEvent)[4][0];
 	
