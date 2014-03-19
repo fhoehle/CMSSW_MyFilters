@@ -52,6 +52,7 @@ class DiLepMcFilter : public edm::EDFilter {
 	bool isMuonic(reco::GenParticle part);
 	bool isElectronic(reco::GenParticle part);
 	bool isHadronic(reco::GenParticle part);
+        bool invert_;
       // ----------member data ---------------------------
 };
 //bool DiLepMcFilter::isLeptonic(reco::GenParticle part){
@@ -83,6 +84,7 @@ DiLepMcFilter::DiLepMcFilter(const edm::ParameterSet& iConfig)
 {
    //now do what ever initialization is needed
 	ttbarEventTag_ = iConfig.getUntrackedParameter<edm::InputTag>("ttbarEventTag");
+        invert_  = iConfig.getParameter<bool>("invert");
 //	lowerpdgId_ = iConfig.getParameter<int>("lowerpdgId");
 //	upperpdgId_ = iConfig.getParameter<int>("upperpdgId");
 }
@@ -126,7 +128,8 @@ DiLepMcFilter::filter(edm::Event& iEvent, const edm::EventSetup& iSetup)
 	//	return true;
 	//}
 	//else return false;
-	return (isMuonic(WplusDecay1) ||  isElectronic(WplusDecay1)) && (isElectronic(WminusDecay1) || isMuonic(WminusDecay1) ); 
+        bool res = (isMuonic(WplusDecay1) ||  isElectronic(WplusDecay1)) && (isElectronic(WminusDecay1) || isMuonic(WminusDecay1) );
+	return (invert_) ? ! res : res; 
 }
 
 // ------------ method called once each job just before starting event loop  ------------

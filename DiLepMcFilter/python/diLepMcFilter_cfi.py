@@ -5,6 +5,7 @@ myTTbarGenEvent10Parts= cms.EDProducer('MyTTbarGenEvent10Parts',
         )
 DiLepMcFilter = cms.EDFilter('DiLepMcFilter',
         ttbarEventTag = cms.untracked.InputTag("myTTbarGenEvent10Parts"),
+        invert = cms.bool(False),
         )
 pdgIdTest = cms.PSet(min          = cms.untracked.double(     -30.5),
                           max          = cms.untracked.double(    30.5),
