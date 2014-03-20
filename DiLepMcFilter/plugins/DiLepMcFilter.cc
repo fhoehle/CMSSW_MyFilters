@@ -32,6 +32,7 @@
 
 #include "DataFormats/HepMCCandidate/interface/GenParticle.h"
 
+#include "CMSSW_MyFilters/DiLepMcFilter/interface/DiLepMcFilters.h"
 //
 // class declaration
 //
@@ -48,26 +49,9 @@ class DiLepMcFilter : public edm::EDFilter {
       edm::InputTag ttbarEventTag_;
 	int lowerpdgId_;
 	int upperpdgId_;
-//	bool isLeptonic(reco::GenParticle part);
-	bool isMuonic(reco::GenParticle part);
-	bool isElectronic(reco::GenParticle part);
-	bool isHadronic(reco::GenParticle part);
         bool invert_;
       // ----------member data ---------------------------
 };
-//bool DiLepMcFilter::isLeptonic(reco::GenParticle part){
-//	if(abs(part.pdgId()) >= 11 && abs(part.pdgId()) <= 14 ) return true;
-//	else return false;
-//}
-bool DiLepMcFilter::isMuonic(reco::GenParticle part){
-	return (abs(part.pdgId()) >= 13 && abs(part.pdgId()) <= 14 );
-}
-bool DiLepMcFilter::isHadronic(reco::GenParticle part){
-	return (abs(part.pdgId()) <=6 && part.pdgId()!= 0 );
-}
-bool DiLepMcFilter::isElectronic(reco::GenParticle part){
-        return (abs(part.pdgId()) >= 11 && abs(part.pdgId()) <= 12 );
-}
 
 //
 // constants, enums and typedefs
