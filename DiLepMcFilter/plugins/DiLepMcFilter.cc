@@ -47,8 +47,8 @@ class DiLepMcFilter : public edm::EDFilter {
       virtual bool filter(edm::Event&, const edm::EventSetup&);
       virtual void endJob() ;
       edm::InputTag ttbarEventTag_;
-	int lowerpdgId_;
-	int upperpdgId_;
+	//int lowerpdgId_;
+	//int upperpdgId_;
         bool invert_;
       // ----------member data ---------------------------
 };
@@ -101,17 +101,6 @@ DiLepMcFilter::filter(edm::Event& iEvent, const edm::EventSetup& iSetup)
 	reco::GenParticle WminusDecay2; WminusDecay2 = (*ttbarEvent)[9][0];
 
 
-	bool muonicDecayWplus = (isMuonic(WplusDecay1) && isMuonic(WplusDecay2));
-	bool muonicDecayWminus = (isMuonic(WminusDecay1) && isMuonic(WminusDecay2));
-
-	bool hadronicDecayWplus = (isHadronic(WplusDecay1) && isHadronic(WplusDecay2));
-	bool hadronicDecayWminus = (isHadronic(WminusDecay1) && isHadronic(WminusDecay2));
-	//if( (leptonicDecayWplus && !leptonicDecayWminus) || (!leptonicDecayWplus && leptonicDecayWminus) ){
-   		
-		//std::cout<<"bling"<<std::endl;
-	//	return true;
-	//}
-	//else return false;
         bool res = (isMuonic(WplusDecay1) ||  isElectronic(WplusDecay1)) && (isElectronic(WminusDecay1) || isMuonic(WminusDecay1) );
 	return (invert_) ? ! res : res; 
 }
